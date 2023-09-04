@@ -4,7 +4,7 @@ function isUserLoggedIn() {
 }
 
 if (!isUserLoggedIn()) {
-    window.location.href = "login.html";
+    window.location.href = "../login/login.html";
 }
 
 function initSession() {
@@ -19,5 +19,6 @@ function initSession() {
 
 function logout() {
     sessionStorage.removeItem('loggedInUserEmail');
-    window.location.href = "login.html";
+    sessionStorage.removeItem('shopping-cart');
+    window.location.href = "../login/login.html";
 }

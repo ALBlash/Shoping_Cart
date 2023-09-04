@@ -11,6 +11,7 @@ const loggedInUser = usersFromSession.find(user => user[0] === loggedInUserEmail
 
 const userPermissions = new Set(loggedInUser.permissions);
 
+// removing options depends by the permissions the user got
 if (!userPermissions.has('ADD_TO_CART')) {
     document.querySelectorAll('.add-to-cart').forEach(elem => elem.remove());
 }

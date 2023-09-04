@@ -1,3 +1,4 @@
+// a User function for creating user's
 function User(username, email, fullname, password, lastLoginDate, permissions) {
     this.username = username;
     this.email = email;
@@ -9,6 +10,7 @@ function User(username, email, fullname, password, lastLoginDate, permissions) {
 
 const users = getUsers();
 
+// so we dont need to create the Users over and over again we keep them in the sessionStorage and check their permissions
 function getUsers() {
     if (!!sessionStorage.getItem('users')) {
         const users = JSON.parse(sessionStorage.getItem('users'));
@@ -51,7 +53,7 @@ if (loginForm) {
         } else {
             updateUserLastLoginDate(email);
             sessionStorage.setItem("loggedInUserEmail", email);
-            window.location.href = "index.html";
+            window.location.href = "../index/index.html";
         }
     });
 }
@@ -66,6 +68,8 @@ function validate(email, password) {
     );
 }
 
+//Check the sessionStorage for the user's existence
+// first with the email & then the password
 function isUserExist(email, password) {
     if (users.has(email)) {
         return users.get(email).password === password;

@@ -1,8 +1,8 @@
-var productItem = [
+const productItem = [
     new Product(1, "FinePix Pro2 3D Camera", "1800.00", "camera.jpg"),
     new Product(2, "EXP Portable HD", "800.00", "external-hard-drive.jpg"),
-    new Product(3, "Luxury Ultra thin Wrist Watch", "500.00", "laptop.jpg"),
-    new Product(4, "XP 1155 Intel Core Laptop", "1000.00", "watch.jpg"),
+    new Product(3, "Luxury Ultra thin Wrist Watch", "500.00", "watch.jpg"),
+    new Product(4, "XP 1155 Intel Core Laptop", "1000.00", "laptop.jpg"),
 ];
 
 showProductGallery(productItem);
@@ -16,20 +16,20 @@ function Product(id, name, price, photo) {
 }
 
 function addToCart(element) {
-    var productParent = element.closest("div.product-item");
-    var id = productParent.querySelector(".productid").value;
-    var price = productParent.querySelector(".price span").innerText;
-    var name = productParent.querySelector(".productname").innerText;
-    var quantity = productParent.querySelector(".product-quantity").value;
+    let productParent = element.closest("div.product-item");
+    let id = productParent.querySelector(".productid").value;
+    let price = productParent.querySelector(".price span").innerText;
+    let name = productParent.querySelector(".productname").innerText;
+    let quantity = productParent.querySelector(".product-quantity").value;
 
-    var cartItem = {
+    let cartItem = {
         id: id,
         name: name,
         price: price,
         quantity: quantity,
     };
 
-    var cartArray = new Array();
+    let cartArray = new Array();
     // If javascript shopping cart session is not empty
     if (sessionStorage.getItem("shopping-cart")) {
         cartArray = JSON.parse(sessionStorage.getItem("shopping-cart"));
@@ -44,7 +44,7 @@ function addToCart(element) {
         cartArray.push(cartItem);
     }
 
-    var cartJSON = JSON.stringify(cartArray);
+    let cartJSON = JSON.stringify(cartArray);
     sessionStorage.setItem("shopping-cart", cartJSON);
 
     showCartTable();
@@ -52,11 +52,11 @@ function addToCart(element) {
 }
 
 function removeFromCart(element) {
-    var productParent = element.closest("div.product-item");
-    var id = productParent.querySelector(".productid").value;
-    var quantity = productParent.querySelector(".product-quantity").value;
+    let productParent = element.closest("div.product-item");
+    let id = productParent.querySelector(".productid").value;
+    let quantity = productParent.querySelector(".product-quantity").value;
 
-    var cartArray = new Array();
+    let cartArray = new Array();
     // If javascript shopping cart session is not empty
     if (sessionStorage.getItem("shopping-cart")) {
         cartArray = JSON.parse(sessionStorage.getItem("shopping-cart"));
@@ -76,7 +76,7 @@ function removeFromCart(element) {
         }
     }
 
-    var cartJSON = JSON.stringify(cartArray);
+    let cartJSON = JSON.stringify(cartArray);
     sessionStorage.setItem("shopping-cart", cartJSON);
 
     showCartTable();
@@ -91,16 +91,16 @@ function emptyCart() {
 }
 
 function showCartTable() {
-    var cartRowHTML = "";
-    var itemCount = 0;
-    var grandTotal = 0;
+    let cartRowHTML = "";
+    let itemCount = 0;
+    let grandTotal = 0;
 
-    var price = 0;
-    var quantity = 0;
-    var subTotal = 0;
+    let price = 0;
+    let quantity = 0;
+    let subTotal = 0;
 
     if (sessionStorage.getItem("shopping-cart")) {
-        var shoppingCart = JSON.parse(sessionStorage.getItem("shopping-cart"));
+        let shoppingCart = JSON.parse(sessionStorage.getItem("shopping-cart"));
 
         //Iterate javascript shopping cart array
         shoppingCart.forEach(function (item) {
@@ -137,14 +137,14 @@ function showCartTable() {
 
 function showProductGallery(product) {
     //Iterate javascript shopping cart array
-    var productHTML = "";
+    let productHTML = "";
     product.forEach(function (item) {
         productHTML +=
             '<div class="product-item">' +
             '<input class="productid" type="hidden" value="' +
             item.id +
             '">' +
-            '<img src="product-images/' +
+            '<img src="../product-images/' +
             item.photo +
             '">' +
             '<div class="productname">' +
