@@ -3,6 +3,9 @@ const productItem = [
     new Product(2, "EXP Portable HD", "800.00", "external-hard-drive.jpg"),
     new Product(3, "Luxury Ultra thin Wrist Watch", "500.00", "watch.jpg"),
     new Product(4, "XP 1155 Intel Core Laptop", "1000.00", "laptop.jpg"),
+    new Product(5, "Apple Watch", "1400.00", "daniel-korpai-hbTKIbuMmBI-unsplash.jpg"),
+    new Product(6, "Air-Pods Pro 2", "700.00", "airpods.png"),
+    new Product(7, "Water Bottle", "60.00", "ryan-hoffman-Kf6UgCx5mb8-unsplash.jpg"),
 ];
 
 showProductGallery(productItem);
@@ -144,7 +147,7 @@ function showProductGallery(product) {
             '<input class="productid" type="hidden" value="' +
             item.id +
             '">' +
-            '<img src="../product-images/' +
+            '<img class="img-size" src="../product-images/' +
             item.photo +
             '">' +
             '<div class="productname">' +

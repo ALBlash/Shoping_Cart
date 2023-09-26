@@ -3,6 +3,7 @@ body {
     font-family: Arial;
     color: #211a1a;
     font-size: 0.9em;
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
 }
 
 .text-left {
@@ -28,17 +29,18 @@ body {
 }
 
 .txt-heading {
-    color: #211a1a;
+    color: #ffffff;
     border-bottom: 1px solid #e0e0e0;
     overflow: auto;
 }
 
 #btnEmpty {
     background-color: #ffffff;
-    border: #d00000 1px solid;
+    border: #d00000 2px solid;
     padding: 5px 10px;
     color: #d00000;
     float: right;
+    font-weight: bold;
     text-decoration: none;
     border-radius: 3px;
     margin: 10px 0px;
@@ -83,11 +85,13 @@ body {
     display: flex;
     flex-flow: column;
     background: #ffffff;
-    border: #e0e0e0 1px solid;
+    border: #13289e73 2px solid;
     padding: 10px 10px 20px 10px;
     line-height: 30px;
     text-align: center;
     gap: 7px;
+    border-radius: 35px;
+    justify-content: center;
 }
 
 .product-image {
@@ -102,12 +106,13 @@ body {
     padding: 2px 1px;
 }
 
-.tbl-cart {
-    font-size: 0.9em;
-}
 
 .tbl-cart th {
     font-weight: normal;
+}
+
+.img-size {
+    width: 250px;
 }
 
 .product-title {
