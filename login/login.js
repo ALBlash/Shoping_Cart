@@ -18,6 +18,8 @@ function getUsers() {
         return new Map(users);
     }
     else {
+        // if the users are not located in the session then we create them here and save them
+        // as key(user email) value(all the user info)
         const user1 = new User("user1", "user1@gmail.com", "User 1", "A123456", null, ['ADD_TO_CART', 'DISCOUNT_15']);
         const user2 = new User("user2", "user2@gmail.com", "User 2", "A123456", null, ['EMPTY_CART', 'ADD_TO_CART']);
         const user3 = new User("user3", "user3@gmail.com", "User 3", "A123456", null, ['DISCOUNT_15', 'EMPTY_CART', 'ADD_TO_CART']);
@@ -34,6 +36,7 @@ function getUsers() {
 
         sessionStorage.setItem('users', JSON.stringify(users));
         users.forEach(user => user[1].permissions = new Set(user[1].permissions));
+        //  the reason we keep them in a map is the key value method
         return new Map(users);
     }
 }

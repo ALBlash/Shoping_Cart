@@ -1,3 +1,6 @@
+//products that will be created in a the function showProductGallery(),
+// they include all the necessary information that we need (id, title, price, img/src);
+
 const productItem = [
     new Product(1, "FinePix Pro2 3D Camera", "1800.00", "camera.jpg"),
     new Product(2, "EXP Portable HD", "800.00", "external-hard-drive.jpg"),
@@ -60,15 +63,26 @@ function removeFromCart(element) {
     let quantity = productParent.querySelector(".product-quantity").value;
 
     let cartArray = new Array();
-    // If javascript shopping cart session is not empty
+    // If shopping cart session is not empty
     if (sessionStorage.getItem("shopping-cart")) {
+
+        // parse the item that's in the session and add it to the cartArray
         cartArray = JSON.parse(sessionStorage.getItem("shopping-cart"));
+        //comparing between the 2 products id's
         const itemIndex = cartArray.findIndex((item) => item.id === id);
+
+        // Check if the item with the given id is found in the cartArray
         if (itemIndex !== -1) {
+            // Update the quantity in the cartArray, ensuring it's not negative
+            //Math.max makes sure that the quantity dont go below zero
             cartArray[itemIndex].quantity = Math.max(
                 Number(cartArray[itemIndex].quantity) - Number(quantity),
                 0
             );
+
+
+
+            // If the quantity becomes zero, remove the item from the cartArray
             if (!cartArray[itemIndex].quantity) {
                 cartArray = cartArray.filter(
                     (value, index) => index !== itemIndex
@@ -86,6 +100,12 @@ function removeFromCart(element) {
     updateUserDiscount();
 }
 
+
+
+
+// every we time we update the table its also being saved in the session
+// so if we press empty it will remove it from the session and
+// we call the function thats incharge on the table
 function emptyCart() {
     if (sessionStorage.getItem("shopping-cart")) {
         sessionStorage.removeItem("shopping-cart");
@@ -93,6 +113,12 @@ function emptyCart() {
     }
 }
 
+
+
+
+// every time a user add's something to the list this function will builed and update the table
+// and other calculations like what the user can buy and discount... (permissions)
+// are located in the permissions.js
 function showCartTable() {
     let cartRowHTML = "";
     let itemCount = 0;
@@ -102,11 +128,16 @@ function showCartTable() {
     let quantity = 0;
     let subTotal = 0;
 
+
+    //if the user has been here and he refreshed the page 
+    // the item's will show becouse its saved on the sessionStorage
     if (sessionStorage.getItem("shopping-cart")) {
         let shoppingCart = JSON.parse(sessionStorage.getItem("shopping-cart"));
 
         //Iterate javascript shopping cart array
         shoppingCart.forEach(function (item) {
+            // to do the math we convert the number's 
+            //using [parseFloat] and [parseInt];
             price = parseFloat(item.price);
             quantity = parseInt(item.quantity);
             subTotal = price * quantity;
@@ -118,6 +149,7 @@ function showCartTable() {
                 item.name +
                 "</td>" +
                 "<td class='text-right'>$" +
+                // ensures that the price will be max of two digits after the dot ("10.00" and not "10.0000231")
                 price.toFixed(2) +
                 "</td>" +
                 "<td class='text-right'>" +
@@ -141,21 +173,13 @@ function showCartTable() {
 function showProductGallery(product) {
     //Iterate javascript shopping cart array
     let productHTML = "";
-    product.forEach(function (item) {
+    product.forEach((item) => {
         productHTML +=
             '<div class="product-item">' +
-            '<input class="productid" type="hidden" value="' +
-            item.id +
-            '">' +
-            '<img class="img-size" src="../product-images/' +
-            item.photo +
-            '">' +
-            '<div class="productname">' +
-            item.name +
-            "</div>" +
-            '<div class="price">$<span>' +
-            item.price +
-            "</span></div>" +
+            '<input class="productid" type="hidden" value="' + item.id + '">' +
+            '<img class="img-size" src="../product-images/' + item.photo + '">' +
+            '<div class="productname">' + item.name + "</div>" +
+            '<div class="price">$<span>' + item.price + "</span></div>" +
             '<div class="cart-action">' +
             '<input type="number" class="product-quantity" name="quantity" value="1" size="2" min="1" />' +
             '<input type="submit" value="Add" class="add-to-cart" onClick="addToCart(this)" />' +

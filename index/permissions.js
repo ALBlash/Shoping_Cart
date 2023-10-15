@@ -7,8 +7,13 @@ const permissionsSet = new Set([
 
 const loggedInUserEmail = sessionStorage.getItem("loggedInUserEmail");
 const usersFromSession = JSON.parse(sessionStorage.getItem("users"));
+// Key:loggedInUserEmail,  Value:example@gmail.com  //// searching for the name of the user that loggedIn
 const loggedInUser = usersFromSession.find(user => user[0] === loggedInUserEmail)[1];
 
+
+
+
+// depends what permissions the user has thats what he will be able to do
 const userPermissions = new Set(loggedInUser.permissions);
 
 // removing options depends by the permissions the user got
@@ -30,10 +35,14 @@ if (!userPermissions.has('EMPTY_CART')) {
 
 updateUserDiscount();
 
+
+// calculate the discount
 function updateUserDiscount() {
     if (userPermissions.has('DISCOUNT_15')) {
         const totalAmount = document.getElementById('totalAmount');
         const tbody = document.getElementById('cartTableBody');
+
+        // slice remove's the $ sign
         tbody.innerHTML += `
             <tr>
                 <td colspan="3">Discount 15%</td>
