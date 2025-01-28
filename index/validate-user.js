@@ -6,7 +6,7 @@ function isUserLoggedIn() {
 }
 
 if (!isUserLoggedIn()) {
-    window.location.href = "../login/login.html";
+    window.location.href = "../index.html";
 }
 
 // this function find's the user name and display's it on the page
@@ -24,5 +24,5 @@ function initSession() {
 function logout() {
     sessionStorage.removeItem('loggedInUserEmail');
     sessionStorage.removeItem('shopping-cart');
-    window.location.href = "../login/login.html";
+    window.location.href = "../index.html";
 }
