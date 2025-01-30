@@ -83,21 +83,21 @@ function isUserExist(email, password) {
 // "DD-MM-YYYY HH:mm"
 function updateUserLastLoginDate(email) {
     const now = new Date();
-    const day = now.getDate() < 10 ? "0" + now.getDate() : "" + now.getDate();
-    const month =
-        now.getMonth() + 1 < 10
-            ? "0" + (now.getMonth() + 1)
-            : "" + (now.getMonth() + 1);
-
-    const year = "" + now.getFullYear();
-
-    const hours =
-        now.getHours() < 10 ? "0" + now.getHours() : "" + now.getHours();
-    const minutes =
-        now.getMinutes() < 10 ? "0" + now.getMinutes() : "" + now.getMinutes();
+    const day = now.getDate().toString().padStart(2, "0");
+    const month = (now.getMonth() + 1).toString().padStart(2, "0");
+    const year = now.getFullYear();
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
 
     let datetime = `${day}-${month}-${year} ${hours}:${minutes}`;
 
-    // the user that has past all the validation's we add to his "lastLoginDate" the exact time he enterd
+    // Update the last login date
     users.get(email).lastLoginDate = datetime;
+
+    // Convert Set to Array before saving
+    const usersArray = [...users].map(([key, user]) => {
+        return [key, { ...user, permissions: [...user.permissions] }];
+    });
+
+    sessionStorage.setItem("users", JSON.stringify(usersArray));
 }

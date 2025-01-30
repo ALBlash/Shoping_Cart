@@ -8,6 +8,9 @@ const permissionsSet = new Set([
 const loggedInUserEmail = sessionStorage.getItem("loggedInUserEmail");
 const usersFromSession = JSON.parse(sessionStorage.getItem("users"));
 // Key:loggedInUserEmail,  Value:example@gmail.com  //// searching for the name of the user that loggedIn
+
+//  we iterate through the users, and try to find and compare, user במקום האפס which is the email, 
+// and the email that is now looged in the session storage, and then we get his object ( [1] ) that contains his information
 const loggedInUser = usersFromSession.find(user => user[0] === loggedInUserEmail)[1];
 
 
